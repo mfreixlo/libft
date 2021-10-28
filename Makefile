@@ -14,13 +14,13 @@ FLAGS = -Wall -Wextra -Werror
 
 $(NAME) : ${OBJS}
 	ar -rc $(NAME) $(OBJS)
-	gcc $(FLAGS) -o libft $(OBJS) -lbsd
+	gcc $(FLAGS) -o libft $(OBJS)
 
 all : $(NAME)
 
 bonus : $(NAME) $(BONUS_O) $(OBJS)
 	ar -rc $(NAME) $(BONUS_O)
-	gcc $(FLAGS) -o bonus $(BONUS) -lbsd
+	gcc $(FLAGS) -o bonus $(BONUS)
 
 .c.o:
 	gcc $(FLAGS) -c $< -o $(<:.c=.o)

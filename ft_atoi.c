@@ -1,14 +1,27 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mfreixo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/28 15:52:58 by mfreixo-          #+#    #+#             */
+/*   Updated: 2021/10/28 15:54:12 by mfreixo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int ft_isspace(char c)
+#include "libft.h"
+
+static int	ft_isspace(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\v' || c == '\r')
+	if (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\f' || c == '\v' || c == '\r')
 		return (1);
 	else
 		return (0);
 }
 
-static int ft_isnum(char c)
+static int	ft_isnum(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -16,11 +29,11 @@ static int ft_isnum(char c)
 		return (0);
 }
 
-int ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-	char *nmr;
-	int sign;
-	int n;
+	char	*nmr;
+	int		sign;
+	int		n;
 
 	n = 0;
 	nmr = (char *) nptr;

@@ -1,30 +1,42 @@
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mfreixo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/28 16:13:37 by mfreixo-          #+#    #+#             */
+/*   Updated: 2021/10/28 16:28:31 by mfreixo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int ft_count (char *s, char c) //funcao que conta o numero de palavras separadas por c
+#include "libft.h"
+
+static int	ft_count(char *s, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (*s)
 	{
 		while (*s && *s == c)
 			s++;
-		if(*s != c)
+		if (*s != c)
 		{
 			s++;
 			i++;
 		}
 		while (*s && *s != c)
 			s++;
-		if(*s == c)
-			continue;
+		if (*s == c)
+			continue ;
 	}
 	return (i);
 }
 
-static int ft_slen (char *str, int pos, char c) //funcao que conta o tamanho da proxima palavra que se vai copiar
+static int	ft_slen(char *str, int pos, char c)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (str[pos] && str[pos] == c)
@@ -38,42 +50,56 @@ static int ft_slen (char *str, int pos, char c) //funcao que conta o tamanho da 
 	}
 	return (len);
 }
-
-char **ft_split (char const *s, char c)
+/*
+void ft_strcpy(int i, char const *s, char c, char **split, int k)
 {
-	char *str;
-	int i;
-	char **split;
-	int n;
-	int k;
-	int len;
-	int j;
+
+	int		len;
+	int		j;
+			
+	len = ft_slen((char *)s, i, c) + 0;
+	split[k] = malloc(sizeof(char) * len);
+	if (!split[k])
+		return ;
+	j = 0;
+	while (j < len - 1)
+	{
+		split[k][j++] = s[i++];
+	}
+	split[k++][j] = '\0';
+}*/
+
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	char	**split;
+	int		k;
+	int		len;
+	int		j;
 
 	i = 0;
 	k = 0;
-	str = (char *)s;
-	n = ft_count (str, c) + 1;
-	split = malloc (sizeof(char *) * n);
-	while (str[i])
+	len = ft_count ((char *)s, c) + 1;
+	split = malloc (sizeof(char *) * len);
+	while (s[i])
 	{
-		while (str[i] && str[i] == c)
+		while (s[i] && s[i] == c)
 			i++;
-		if (str[i] != c)
+		if (s[i] != c)
+			ft_strcpy(i, s, c, split, k);
 		{
-			len = ft_slen(str, i, c) + 1;
-			if(!(split[k] = malloc(sizeof(char) * len)))
+			len = ft_slen((char *)s, i, c) + 0;
+			split[k] = malloc(sizeof(char) * len);
+			if (!split[k])
 				return (NULL);
 		}
 		j = 0;
 		while (j < len - 1)
 		{
-			split[k][j] = str[i];
-			i++;
-			j++;
+			split[k][j++] = s[i++];
 		}
-		split[k][j] = '\0';
-		k++;
-		continue;
+		split[k++][j] = '\0';
+		continue ;
 	}
 	split[k] = NULL;
 	return (split);

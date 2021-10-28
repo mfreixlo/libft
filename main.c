@@ -108,18 +108,18 @@ int main()
 		char arr1[11] = "Palavriado";
 		
 		char arr2[3] = "oi";
-		char arr3[11] = "Palavriado";
+		//char arr3[11] = "Palavriado";
 		
 		char arr4[3] = "oi";
-		char arr5[11] = "Palavriado";
+		//char arr5[11] = "Palavriado";
 		
 		ft_memcpy(arr, arr1, 4);
 		printf("%s\n", arr);
 		
-		memcpy(arr2, arr3, 4);
+		//memcpy(arr2, arr3, 4);
 		printf("%s\n", arr2);
 	
-		memmove(arr4, arr5, 4);
+		//memmove(arr4, arr5, 4);
 		printf("%s\n", arr4);
 	}
 	else if (!strcmp(funcao, "strlcat"))
@@ -139,7 +139,7 @@ int main()
 		char str2[3] = "nho";
 		char str3[3] = "nho";
 		
-		printf("%lu\n", strlcpy(str2, str1, 6));
+		//printf("%lu\n", strlcpy(str2, str1, 6));
 		printf("%s\n", str2);
 	
 		printf("%lu\n", ft_strlcpy(str3, str1, 6));
