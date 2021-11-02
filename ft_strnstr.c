@@ -1,32 +1,36 @@
-#include <stddef.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mfreixo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/29 18:01:47 by mfreixo-          #+#    #+#             */
+/*   Updated: 2021/10/29 18:09:31 by mfreixo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *ft_strnstr(const char *big, const char *little, size_t len)
+#include "libft.h"
+
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char *s;
-	int i;
-	int j;
-	int k;
-	char *l;
+	int		i;
+	int		j;
+	int		k;
 
-	s = (char *)big;
-	l = (char *)little;
 	i = 0;
-	if (!(*l))
-		return (s);
-	while (s[i] && i < (int) len)
+	if (!(*little))
+		return ((char *)big);
+	while (big[i] && i < (int) len)
 	{
-		if (s[i] == l[0])
+		if (big[i] == little[0])
 		{
 			k = i;
 			j = 0;
-			while (*(s + k) && *(l + j) && s[k] == l[j] && k < (int) len)
-			{
-				k++;
-				j++;
-			}
-			if (l[j] == '\0')
-				return (s + i);
+			while (*(big + k) && *(little + j)
+				&& big[k] == little[j++] && k++ < (int) len);
+			if (little[j] == '\0')
+				return ((char *)big + i);
 			else
 				i++;
 		}

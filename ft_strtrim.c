@@ -1,41 +1,82 @@
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mfreixo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/29 17:45:29 by mfreixo-          #+#    #+#             */
+/*   Updated: 2021/10/29 19:03:20 by mfreixo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+static int	ft_cut(char const *s1, int k, int ascii[128])
 {
-	char *str1;
-	char *str2;
-	char *str3;
-	int i;
-	int ascii[128];
-	int k;
+	int	state;
+	int	cut;
 
-	str1 = (char*) s1;
-	str2 = (char *) set;
-	str3 = malloc(sizeof(char) * (int)ft_strlen(str1));
+	state = 1;
+	if (k == 0)
+		state = 0;
+	cut = 0;
+	while (s1[k] && k >= 0)
+	{
+		if (ascii[(int)s1[k]] != 0)
+		{
+			if (state == 1)
+				k--;
+			else
+				k++;
+		}
+		else
+			return (k);
+	}
+	return (k);
+}
+
+void	ft_ascii(const char *set, int ascii[128])
+{
+	int	i;
+
 	i = 0;
-	k = 0;
 	while (i < 127)
 	{
 		ascii[i] = 0;
 		i++;
 	}
-	while (*str2)
+	while (*set)
 	{
-		ascii[(int)*str2]++;
-		str2++;
+		ascii[(int)*set]++;
+		set++;
 	}
-	i = 0;
-	while (str1[i])
-	{
-		if (ascii[(int)str1[i]] != 0)
-			i++;
-		else
-		{
-			str3[k] = str1[i];
-			k++;
-			i++;
-		}
-	}
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*str3;
+	int		ascii[128];
+	int		len;
+	int		start;
+	int		end;
+
+	if (!s1 || !set)
+		return (0);
+	len = (int)ft_strlen(s1);
+	ft_ascii(set, ascii);
+	start = ft_cut(s1, 0, ascii);
+	end = ft_cut(s1, len - 1, ascii);
+	if (start > end)
+		len = 0;
+	else
+		len = end - start;
+	str3 = malloc(sizeof(char) * (len + 1));
+	if (!str3)
+		return (0);
+	len = 0;
+	while (s1[start] && start <= end)
+		str3[len++] = s1[start++];
+	str3[len] = '\0';
 	return (str3);
 }

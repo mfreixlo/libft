@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfreixo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 16:13:37 by mfreixo-          #+#    #+#             */
-/*   Updated: 2021/10/28 16:28:31 by mfreixo-         ###   ########.fr       */
+/*   Created: 2021/11/02 10:07:57 by mfreixo-          #+#    #+#             */
+/*   Updated: 2021/11/02 10:32:02 by mfreixo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count(char *s, char c)
+static int	ft_count(char const *s, char c)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ static int	ft_count(char *s, char c)
 	return (i);
 }
 
-static int	ft_slen(char *str, int pos, char c)
+static int	ft_slen(char const *str, int pos, char c)
 {
 	int	len;
 
@@ -50,24 +50,31 @@ static int	ft_slen(char *str, int pos, char c)
 	}
 	return (len);
 }
-/*
-void ft_strcpy(int i, char const *s, char c, char **split, int k)
-{
 
-	int		len;
-	int		j;
-			
-	len = ft_slen((char *)s, i, c) + 0;
-	split[k] = malloc(sizeof(char) * len);
-	if (!split[k])
-		return ;
+static int	ft_scpy(char const *s1, char *s2, int ind, int len)
+{
+	int	j;
+	int	k;
+
+	k = 0;
 	j = 0;
 	while (j < len - 1)
+		s2[j++] = s1[ind++];
+	s2[j] = '\0';
+	return (ind);
+}
+
+static void ft_del(char **str)
+{
+	if (!str)
+		return ;
+	while (*str)
 	{
-		split[k][j++] = s[i++];
+		free(*str);
+		str++;
 	}
-	split[k++][j] = '\0';
-}*/
+	free (str);
+}
 
 char	**ft_split(char const *s, char c)
 {
@@ -75,30 +82,22 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 	int		k;
 	int		len;
-	int		j;
 
 	i = 0;
 	k = 0;
-	len = ft_count ((char *)s, c) + 1;
-	split = malloc (sizeof(char *) * len);
+	split = malloc (sizeof(char *) * (ft_count (s, c) + 1));
 	while (s[i])
 	{
 		while (s[i] && s[i] == c)
 			i++;
 		if (s[i] != c)
-			ft_strcpy(i, s, c, split, k);
 		{
-			len = ft_slen((char *)s, i, c) + 0;
+			len = ft_slen(s, i, c) + 1;
 			split[k] = malloc(sizeof(char) * len);
-			if (!split[k])
-				return (NULL);
+			if (!(split[k]))
+				ft_del(split);
+			i = ft_scpy(s, split[k++], i, len);
 		}
-		j = 0;
-		while (j < len - 1)
-		{
-			split[k][j++] = s[i++];
-		}
-		split[k++][j] = '\0';
 		continue ;
 	}
 	split[k] = NULL;
