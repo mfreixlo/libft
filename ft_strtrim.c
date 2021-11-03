@@ -6,7 +6,7 @@
 /*   By: mfreixo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:45:29 by mfreixo-          #+#    #+#             */
-/*   Updated: 2021/10/29 19:03:20 by mfreixo-         ###   ########.fr       */
+/*   Updated: 2021/11/03 10:07:11 by mfreixo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		len = 0;
 	else
 		len = end - start;
-	str3 = malloc(sizeof(char) * (len + 1));
+	str3 = malloc(sizeof(char) * (len + 2));
 	if (!str3)
 		return (0);
 	len = 0;

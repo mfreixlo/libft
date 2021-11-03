@@ -6,7 +6,7 @@
 /*   By: mfreixo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:12:23 by mfreixo-          #+#    #+#             */
-/*   Updated: 2021/10/28 16:12:59 by mfreixo-         ###   ########.fr       */
+/*   Updated: 2021/11/03 12:29:13 by mfreixo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd(c, fd);
 		ft_putnbr_fd(n * -1, fd);
 	}
-	else if (n > 10)
+	else if (n >= 10)
 	{
 		ft_putnbr_fd(n / 10, fd);
 		c = n % 10 + '0';
