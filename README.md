@@ -1,2 +1,0 @@
-# libft
-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

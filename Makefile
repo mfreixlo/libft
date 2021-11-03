@@ -21,7 +21,7 @@ bonus : $(NAME) $(BONUS_O) $(OBJS)
 	ar -rc $(NAME) $(BONUS_O)
 
 .c.o:
-	gcc $(FLAGS) -c $< -o $(<:.c=.o)
+	gcc $(FLAGS) -c $< -o $(<:.c=.o) 
 
 clean :
 	$(RM) $(OBJS) $(BONUS_O)

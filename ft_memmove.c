@@ -6,7 +6,7 @@
 /*   By: mfreixo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 11:14:44 by mfreixo-          #+#    #+#             */
-/*   Updated: 2021/11/02 17:41:09 by mfreixo-         ###   ########.fr       */
+/*   Updated: 2021/11/03 14:14:38 by mfreixo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memmove(void *str1, const void *str2, size_t n)
 	char		*aux;
 	const char	*str;
 
-	if (!str1)
+	if (!str1 || !str2)
 		return (NULL);
 	aux = str1;
 	str = str2;
